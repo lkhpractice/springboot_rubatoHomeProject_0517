@@ -74,14 +74,14 @@
           <div id="search">
             <div id="select_img"><img src="/resources/img/select_search.gif"></div>
             <div id="search_select">
-              <select>
-                <option>제목</option>
-                <option>내용</option>
-                <option>글쓴이</option>
+              <select name="searchOption">
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+                <option value="writer">글쓴이</option>
               </select>
             </div>
-            <div id="search_input"><input type="text"></div>
-            <div id="search_btn"><img src="/resources/img/search_button.gif"></div>
+            <div id="search_input"><input type="text" name="keyword"></div>
+            <div id="search_btn"><input type="image" src="/resources/img/search_button.gif"></div>
           </div>
           </form>
         </div> <!-- total search 끝 -->
@@ -97,7 +97,10 @@
           <tr>
             <td class="col1">${dto.bnum }</td>
             <td class="col2">
-              <a href="board_view?bnum=${dto.bnum }">${dto.btitle }</a>
+              <a href="board_view?bnum=${dto.bnum }">${dto.btitle }</a>&nbsp;&nbsp;&nbsp;
+              <c:if test="${dto.breplycount != 0 }">
+              <span style="color:#999999; font-size: 8px;">[${dto.breplycount }]</span>
+              </c:if>
             </td>
             <td class="col3">${dto.bname }</td>
             <td class="col4"><c:out value="${fn:substring(dto.bdate,0,10) }"></c:out></td>
@@ -108,7 +111,7 @@
         <div id="buttons">
           <div class="col1">◀ 이전 1 다음 ▶</div>
           <div class="col2">
-            <img src="/resources/img/list.png">
+            <a href="board_list"><img src="/resources/img/list.png"></a>
             <a href="board_write"><img src="/resources/img/write.png"></a>
           </div>
         </div>

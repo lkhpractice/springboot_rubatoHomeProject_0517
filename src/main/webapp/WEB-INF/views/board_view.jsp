@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,13 +74,27 @@
         <p id="view_content">
 			${boardDto.bcontent }
         </p>
+        <table border="1" cellpadding="0" cellspacing="0" width="750">
+        	<c:forEach items="${replyList }" var="replyDto">
+        	<tr>
+        		<td align="center">${replyDto.rid }</td>
+        		<td width="70%">${replyDto.rcontent }<br><br>${replyDto.rdate }</td>
+        		<td align="center">
+        			<input type="button" value="삭제" onclick="script:window.location.href='reply_delete?rnum=${replyDto.rnum }&rorinum=${boardDto.bnum }'">
+        		</td>
+        	</tr>
+        	</c:forEach>   
+        </table>
+        <form action="reply_write">
+        <input type="hidden" name="rorinum" value="${boardDto.bnum }">
         <div id="comment_box">
           <img id="title_comment" src="/resources/img/title_comment.gif">
-          <textarea></textarea>
-          <img id="ok_ripple" src="/resources/img/ok_ripple.gif">
+          <textarea name="rcontent"></textarea>
+          <input type="image" src="/resources/img/ok_ripple.gif" id="ok_ripple">
         </div>
+        </form>
         <div id="buttons">
-          <a href="#"><img src="/resources/img/delete.png"></a>
+          <a href="board_delete?bnum=${boardDto.bnum }&rnum=${replyDto.rnum }"><img src="/resources/img/delete.png"></a>
           <a href="board_list"><img src="/resources/img/list.png"></a>
           <a href="board_write"><img src="/resources/img/write.png"></a>
         </div>

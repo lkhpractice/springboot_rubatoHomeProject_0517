@@ -42,9 +42,11 @@ public class HomeController {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
-		dao.boardHitDao(request.getParameter("bnum"));
+		dao.boardHitDao(request.getParameter("bnum")); // 조회수 증가
 		
 		model.addAttribute("boardDto", dao.boardContentViewDao(request.getParameter("bnum")));
+		
+		model.addAttribute("replyList", dao.replyListDao(request.getParameter("bnum")));
 		
 		return "board_view";
 	}
@@ -63,4 +65,64 @@ public class HomeController {
 		return "redirect:board_list";
 	}
 	
+	@RequestMapping(value = "/board_delete")
+	public String board_delete(HttpServletRequest request) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		dao.boardDeleteDao(request.getParameter("bnum"));
+		
+		return "redirect:board_list";
+	}
+	
+	@RequestMapping(value = "/search_list")
+	public String search_list(HttpServletRequest request, Model model) {
+		
+		String searchOption = request.getParameter("searchOption");
+		String keyword = request.getParameter("keyword");
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		if(searchOption.equals("title" )) {
+			model.addAttribute("list", dao.boardSearchTitleDao(keyword));
+			model.addAttribute("totalCount", dao.boardSearchTitleDao(keyword).size());
+		} else if(searchOption.equals("content")) {
+			model.addAttribute("list", dao.boardSearchContentDao(keyword));
+			model.addAttribute("totalCount", dao.boardSearchContentDao(keyword).size());
+		} else {
+			model.addAttribute("list", dao.boardSearchWriterDao(keyword));
+			model.addAttribute("totalCount", dao.boardSearchWriterDao(keyword).size());
+		}
+		return "board_list";
+	}
+	
+	@RequestMapping(value = "/reply_write")
+	public String reply_write(HttpServletRequest request, Model model) {
+
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		dao.replyWriteDao(request.getParameter("rcontent"), request.getParameter("rorinum"));
+		
+		dao.replyCountDao(request.getParameter("rorinum")); // 원글의 댓글 수를 1증가
+		
+		model.addAttribute("boardDto", dao.boardContentViewDao(request.getParameter("rorinum")));
+
+		model.addAttribute("replyList", dao.replyListDao(request.getParameter("rorinum")));
+		
+		return "board_view";
+	}
+	
+	@RequestMapping(value = "/reply_delete")
+	public String reply_delete(HttpServletRequest request, Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		dao.replyDeleteDao(request.getParameter("rnum"));
+		
+		model.addAttribute("boardDto", dao.boardContentViewDao(request.getParameter("rorinum")));
+		
+		model.addAttribute("replyList", dao.replyListDao(request.getParameter("rorinum")));
+		
+		return "board_view";
+	}
 }
