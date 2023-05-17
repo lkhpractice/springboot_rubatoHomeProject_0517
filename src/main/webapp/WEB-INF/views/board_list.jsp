@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>클래식기타 커뮤니티</title>
@@ -8,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
     <link rel="stylesheet" type="text/css" href="css/board_left.css">
-    <link rel="stylesheet" type="text/css" href="css/board_write_main.css">
+    <link rel="stylesheet" type="text/css" href="css/board_list_main.css">
 </head>
 <body>
   <div id="wrap">
@@ -64,28 +66,63 @@
       <section id="main">
         <img src="img/comm.gif">
         <h2 id="board_title">자유게시판</h2>
-        <div id="write_title"><h2>글쓰기</h2></div>
+        <div id="total_search">
+          <div id="total">▷ 총 5개의 게시물이 있습니다.</div>
+          <div id="search">
+            <div id="select_img"><img src="img/select_search.gif"></div>
+            <div id="search_select">
+              <select>
+                <option>제목</option>
+                <option>내용</option>
+                <option>글쓴이</option>
+              </select>
+            </div>
+            <div id="search_input"><input type="text"></div>
+            <div id="search_btn"><img src="img/search_button.gif"></div>
+          </div>
+        </div> <!-- total search 끝 -->
         <table>
-          <tr id="name">
-            <td class="col1">이름</td>
-            <td class="col2"><input type="text"></td>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>일시</th>
+            <th>조회수</th>
           </tr>
-          <tr id="subject">
-            <td class="col1">제목</td>
-            <td class="col2"><input type="text"></td>
+          <tr>
+            <td class="col1">1</td>
+            <td class="col2">
+              <a href="board_view.html">까스통님의 선물인 보드카가 정말 독하네요!!!</a>
+            </td>
+            <td class="col3">루바토</td>
+            <td class="col4">2022-09-30</td>
+            <td class="col5">13</td>
           </tr>
-          <tr id="content">
-            <td class="col1">내용</td>
-            <td class="col2"><textarea></textarea></td>
+          <tr>
+            <td class="col1">2</td>
+            <td class="col2">
+              <a href="board_view.html">까스통님의 선물인 보드카가 정말 독하네요!!!</a>
+            </td>
+            <td class="col3">루바토</td>
+            <td class="col4">2022-09-30</td>
+            <td class="col5">13</td>
           </tr>
-          <tr id="upload">
-            <td class="col1">업로드 파일</td>
-            <td class="col2"><input type="file"></td>
+          <tr>
+            <td class="col1">3</td>
+            <td class="col2">
+              <a href="board_view.html">까스통님의 선물인 보드카가 정말 독하네요!!!</a>
+            </td>
+            <td class="col3">루바토</td>
+            <td class="col4">2022-09-30</td>
+            <td class="col5">13</td>
           </tr>
-        </table>
+        </table> <!-- 게시판 목록 테이블 끝 -->
         <div id="buttons">
-          <a href="board_list.html"><img src="img/ok.png"></a>
-          <a href="board_list.html"><img src="img/list.png"></a>
+          <div class="col1">◀ 이전 1 다음 ▶</div>
+          <div class="col2">
+            <img src="img/list.png">
+            <a href="board_write.html"><img src="img/write.png"></a>
+          </div>
         </div>
       </section> <!-- section main 끝 -->
     </main>
