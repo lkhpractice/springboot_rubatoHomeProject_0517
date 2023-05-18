@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.rubato.home.dao.IDao;
 
@@ -52,7 +54,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/board_writeOk")
-	public String board_writeOk(HttpServletRequest request) {
+	public String board_writeOk(HttpServletRequest request, @RequestPart MultipartFile files) {
 		
 		String bname = request.getParameter("bname");
 		String btitle = request.getParameter("btitle");
@@ -71,6 +73,8 @@ public class HomeController {
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
 		dao.boardDeleteDao(request.getParameter("bnum"));
+		
+		dao.boardReplyDeleteDao(request.getParameter("rorinum"));
 		
 		return "redirect:board_list";
 	}
@@ -117,7 +121,9 @@ public class HomeController {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
-		dao.replyDeleteDao(request.getParameter("rnum"));
+		dao.replyDeleteDao(request.getParameter("rnum")); // 댓글 삭제
+		
+		dao.replyCountMinusDao(request.getParameter("rorinum")); // 댓글 개수 1개 삭제
 		
 		model.addAttribute("boardDto", dao.boardContentViewDao(request.getParameter("rorinum")));
 		

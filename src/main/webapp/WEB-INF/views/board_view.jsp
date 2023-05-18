@@ -94,7 +94,7 @@
         </div>
         </form>
         <div id="buttons">
-          <a href="board_delete?bnum=${boardDto.bnum }&rnum=${replyDto.rnum }"><img src="/resources/img/delete.png"></a>
+          <a href="board_delete?bnum=${boardDto.bnum }&rorinum=${boardDto.bnum }"><img src="/resources/img/delete.png"></a>
           <a href="board_list"><img src="/resources/img/list.png"></a>
           <a href="board_write"><img src="/resources/img/write.png"></a>
         </div>
