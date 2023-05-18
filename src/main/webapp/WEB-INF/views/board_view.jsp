@@ -85,7 +85,7 @@
         	</tr>
         	</c:forEach>   
         </table>
-        <form action="reply_write">
+        <form action="reply_write" method="post">
         <input type="hidden" name="rorinum" value="${boardDto.bnum }">
         <div id="comment_box">
           <img id="title_comment" src="/resources/img/title_comment.gif">
