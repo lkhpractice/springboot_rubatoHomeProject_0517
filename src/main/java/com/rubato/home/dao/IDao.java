@@ -28,4 +28,7 @@ public interface IDao {
 	public void replyCountMinusDao(String rorinum); // 댓글이 달린 원글의 댓글 필드 값 -1
 	public void boardReplyDeleteDao(String rorinum); // 삭제한 게시글 댓글 모두 삭제
 	
+	// 파일 첨부 관련 기능
+	public void fileInfoCreateDao(int forinum, String fileoriname, String filename, String fileextension, String fileurl);
+	
 }
